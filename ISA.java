@@ -19,60 +19,160 @@ public class JavaApplication29 {
         }
         
         Scanner input = new Scanner (System.in);
-        int total;
-        System.out.println("");
-        System.out.println("Enter Instruction type (Load, Store or Add)");
-        String ask = input.nextLine();
+        System.out.println("How many instructions would you like to give? (Input an integer value)");
+        int total = input.nextInt();
+        input.nextLine();
         
-        if ("Load".equals(ask)){
-            System.out.println("Operand # 1: Register Number");
-            int regNo = input.nextInt();
-            System.out.println("Operand # 2: Memory Address");
-            int memAdd = input.nextInt();
+        for(int counting = 0; counting<total; ++counting){
+
+            System.out.println("\nEnter instruction no."+(counting+1)+" type: 'Load', 'Add', or 'Store'...");
+            String ask = input.nextLine();
+
+            if ("Load".equals(ask)){
+                System.out.print("Operand # 1: Register Number R");
+                int regNo = input.nextInt();
+                System.out.print("\nOperand # 2: Memory Address M");
+                int memAdd = input.nextInt();
+                System.out.println("************ISA Simulator************");
+                System.out.println("************Cycle #1************");
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("1\t"+regNo+"\t"+memAdd);
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
             
-            System.out.println("************ISA Simulator************");
-            System.out.println("************Cycle #1************");
+                System.out.println("\n\n************Cycle #2************");
             
-            System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
-            System.out.println("1\t"+regNo+"\t"+memAdd);
-            System.out.println("Register No:");
-            for (int count = 0; count<16; ++count){
-                System.out.print(registersArray[count]+"\t");
-            }
-            System.out.println("\n###############################################################################################################################");
-            System.out.println("Memory No:");
-            for (int count = 0; count<16; ++count){
-                System.out.print(memoryAddress[count]+"\t");
-            }
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("1\t"+regNo+"\t"+memAdd+"\t\tLOAD R"+regNo+" with M"+memAdd);
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
+                System.out.println("\n\n************Cycle #3************");
+                registersArray[regNo] = memoryAddress[memAdd];
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("1\t"+regNo+"\t"+memAdd+"\t\tLOAD R"+regNo+" with M"+memAdd+"\t\t\t Register updated!");
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
+                System.out.println("");
+                }
+            else if("Add".equals(ask)){
+                System.out.print("Operand # 1: Register Number R");
+                int regNo = input.nextInt();
+                System.out.print("\nOperand # 2: Register Number R");
+                int regNoTwo = input.nextInt();
             
-            System.out.println("\n\n************Cycle #2************");
+                System.out.println("************ISA Simulator************");
+                System.out.println("************Cycle #1************");
+
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("1\t"+regNo+"\t"+regNoTwo);
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
+
+                System.out.println("\n\n************Cycle #2************");
+
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("1\t"+regNo+"\t"+regNoTwo+"\t\tADD R"+regNo+" with R"+regNoTwo);
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
+                System.out.println("\n\n************Cycle #3************");
+                registersArray[regNo] = registersArray[regNo]+registersArray[regNoTwo];
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("1\t"+regNo+"\t"+regNoTwo+"\t\tADD R"+regNo+" with R"+regNoTwo+"\t\t\t Register updated!");
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
+                System.out.println("");
+            }
+            else if("Store".equals(ask)){
+                System.out.print("Operand # 1: Register Number R");
+                int regNo = input.nextInt();
+                System.out.print("\nOperand # 2: Memory Address M");
+                int memAdd = input.nextInt();
+                System.out.println("************ISA Simulator************");
+                System.out.println("************Cycle #1************");
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("3\t"+regNo+"\t"+memAdd);
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
             
-            System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
-            System.out.println("1\t"+regNo+"\t"+memAdd+"\t\tLOAD R"+regNo+" with M"+memAdd);
-            System.out.println("Register No:");
-            for (int count = 0; count<16; ++count){
-                System.out.print(registersArray[count]+"\t");
+                System.out.println("\n\n************Cycle #2************");
+            
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("3\t"+regNo+"\t"+memAdd+"\t\tLOAD R"+regNo+" with M"+memAdd);
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
+                System.out.println("\n\n************Cycle #3************");
+                memoryAddress[memAdd] = registersArray[regNo];
+                System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
+                System.out.println("3\t"+regNo+"\t"+memAdd+"\t\tLOAD R"+regNo+" with M"+memAdd+"\t\t\t Memory updated!");
+                System.out.println("Register No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(registersArray[count]+"\t");
+                }
+                System.out.println("\n###############################################################################################################################");
+                System.out.println("Memory No:");
+                for (int count = 0; count<16; ++count){
+                    System.out.print(memoryAddress[count]+"\t");
+                }
+                System.out.println("");
             }
-            System.out.println("\n###############################################################################################################################");
-            System.out.println("Memory No:");
-            for (int count = 0; count<16; ++count){
-                System.out.print(memoryAddress[count]+"\t");
-            }
-            System.out.println("\n\n************Cycle #3************");
-            registersArray[regNo] = memoryAddress[memAdd];
-            System.out.println("Fetch Instruction\t\tDecode Instruction\t\tExecute Instruction");
-            System.out.println("1\t"+regNo+"\t"+memAdd+"\t\tLOAD R"+regNo+" with M"+memAdd+"\t\t\t Register updated!");
-            System.out.println("Register No:");
-            for (int count = 0; count<16; ++count){
-                System.out.print(registersArray[count]+"\t");
-            }
-            System.out.println("\n###############################################################################################################################");
-            System.out.println("Memory No:");
-            for (int count = 0; count<16; ++count){
-                System.out.print(memoryAddress[count]+"\t");
-            }
-        }
-        
+            input.nextLine();
+    }
         
 /*        System.out.println("1. Binary to decimal\n2. Hexadecimal to decimal\n3. Decimal to base 2\n4. Decimal to base 16\n5. Binary fraction to decimal\n6. Decimal fraction to binary");
         
@@ -298,4 +398,4 @@ public class JavaApplication29 {
         }
         return verifyUrl;
     }
-}*/ 
+}*/
